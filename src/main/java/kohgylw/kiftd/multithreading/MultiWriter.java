@@ -157,7 +157,7 @@ public class MultiWriter {
         Thread.sleep(1 * 1000);
         String bucket = UUID.randomUUID().toString()
                 .replace("-", "");
-        String cacheFile = tempDir + File.separator + "mino."+ fo.getName();
+        String cacheFile = tempDir + File.separator + "mino." + bucket + "." + fo.getName();
         if (sendBody) {
             File tempFile = new File(cacheFile);
             minioUtil.createBucket(bucket);
