@@ -99,7 +99,7 @@ public class MinioUtil {
         return objectItems;
     }
 
-    public synchronized File getFile(String bucket, String file, File tempFile) {
+    public File getFile(String bucket, String file, File tempFile) {
         InputStream stream;
         try {
             stream = minioClient.getObject(

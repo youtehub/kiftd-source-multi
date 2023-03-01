@@ -21,7 +21,7 @@ public class PartSizeUtil {
     private static final Integer maxThread = 500;
 
 
-    public static synchronized void clearCache(MinioResp minioResp, String tempFile) {
+    public static void clearCache(MinioResp minioResp, String tempFile) {
         MinioUtil minioUtil = MinioUtil.init();
         if (ObjUtil.isNotEmpty(minioResp)) {
             List<String> allFilePath = getAllFilePath(minioResp.getFileName(), null);
