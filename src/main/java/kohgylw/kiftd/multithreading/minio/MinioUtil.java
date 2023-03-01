@@ -1,8 +1,10 @@
 package kohgylw.kiftd.multithreading.minio;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import io.minio.*;
+import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import kohgylw.kiftd.server.util.ConfigureReader;
 import kohgylw.kiftd.server.util.KiftdProperties;
@@ -10,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description： minio工具类
@@ -54,6 +56,22 @@ public class MinioUtil {
                 .build();
         MinioUtil minioUtil = new MinioUtil(minioClient, partSize);
         return minioUtil;
+    }
+
+    public List<String> listBuckets() {
+        List<String> defaults = CollUtil.newArrayList("baidubarrel", "thunderbarrel");
+        List<String> list = new ArrayList<>();
+        try {
+            List<Bucket> bucketList = minioClient.listBuckets();
+            list = bucketList.stream()
+                    .map(Bucket::name)
+                    .filter(name -> !defaults.contains(name))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return list;
+        }
+        return list;
     }
 
     /**

@@ -22,12 +22,12 @@ public class PartSizeUtil {
 
 
     public static synchronized void clearCache(MinioResp minioResp, String tempFile) {
+        MinioUtil minioUtil = MinioUtil.init();
         if (ObjUtil.isNotEmpty(minioResp)) {
             List<String> allFilePath = getAllFilePath(minioResp.getFileName(), null);
             allFilePath.forEach(FileUtil::del);
 
             String bucket = minioResp.getBucket();
-            MinioUtil minioUtil = MinioUtil.init();
             List<ObjectItem> objectItems = minioUtil.listBucket(bucket);
             minioUtil.deleteObject(bucket, objectItems.get(0).getObjectName());
             minioUtil.removeBucket(minioResp.getBucket());
@@ -39,6 +39,13 @@ public class PartSizeUtil {
             allFilePath.forEach(FileUtil::del);
             FileUtil.del(tempDir);
             FileUtil.mkdir(tempDir);
+
+            List<String> existBuckets = minioUtil.listBuckets();
+            existBuckets.forEach(bt -> {
+                List<ObjectItem> objectItems = minioUtil.listBucket(bt);
+                objectItems.forEach(obj -> minioUtil.deleteObject(bt, obj.getObjectName()));
+                minioUtil.removeBucket(bt);
+            });
         }
     }
 
