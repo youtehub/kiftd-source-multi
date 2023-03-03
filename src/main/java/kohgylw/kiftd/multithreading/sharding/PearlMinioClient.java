@@ -12,7 +12,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by TD on 2021/10/26
+ * Created by TD on 2023/03/03
  * 扩展 MinioClient <很多protected 修饰符的分片方法，MinioClient实例对象无法使用，只能自定义类继承使用>
  * minio 大文件分片上传思路：
  * 1. 前端访问文件服务，请求上传文件，后端返回签名数据及uploadId
