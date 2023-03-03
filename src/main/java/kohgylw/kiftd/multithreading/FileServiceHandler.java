@@ -1,4 +1,4 @@
-package kohgylw.kiftd.multithreading.queue;
+package kohgylw.kiftd.multithreading;
 
 import cn.hutool.core.util.StrUtil;
 import kohgylw.kiftd.multithreading.MultiWriter;

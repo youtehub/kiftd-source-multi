@@ -1,6 +1,6 @@
 package kohgylw.kiftd.server.util;
 
-import kohgylw.kiftd.multithreading.queue.FileServiceHandler;
+import kohgylw.kiftd.multithreading.FileServiceHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
